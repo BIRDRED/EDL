@@ -1,0 +1,195 @@
+# **CLOJURE**
+
+
+
+
+![](https://pbs.twimg.com/profile_images/1491801917/clojure-conj-logo-square.png)
+
+
+## **Introdução**
+
+Clojure é uma linguagem baseada em programação funcional (LISP) que possui integração com boa parte das linguagens atuais , além de ser bastante utilizado no mercado profissional.
+
+
+## **Origens e Influencias**
+
+A linguagem Clojure foi criada por Rich Hickey criada em 2007.Foi criado por que era necessária uma linguagem parecida com Lisp, que funcionasse como Programação Funcional, com uma plataforma estabelecida e Concorrência.
+
+
+## **Caracteristicas e Vantagens**
+
+Clojure é uma linguagem compilada. Ela compila para bytecode JVM da mesma maneira que o Java faz.É baseada em recursão e consegue escrever código Java em  Clojure. 
+Programas escrito em Clojure são muitos pequenos melhorando a manutenção de códigos.
+
+![](http://conteudo.imasters.com.br/25335/49477.png)
+
+Ex : De um sistema de Tradução e Logs feito em Java e em Clojure.
+
+## **Sobre a Linguagem**
+
+
+Como é inspirado em LISP, a interpretação é inicializada com parenteses:
+
+**- Olá Mundo:** 
+
+    (println "Olá Mundo!")
+    
+
+**- Definindo uma função**
+
+
+    (defn raiz-quadrada [x] (* x x))
+
+
+**- Chamando uma função**
+
+```
+(raiz-quadrada 4)
+```
+
+**- Comparação**
+
+Já possui alguns comparadores nativos como sort, compare e subseq para verificação de listas
+
+ - compare
+
+Semelhante ao compareTo do Java
+
+```
+(compare 10 20)
+;-1
+```
+
+- sort
+
+
+```
+(sort [4 2 3 1])
+;(1 2 3 4)
+```
+
+- subseq
+
+```
+(subseq (sorted-set 1 2 3 4) > 2)
+;(3 4)
+```
+
+
+
+## **Comparação com PHP**
+
+- Macro
+
+- Clojure
+
+
+São utilizados para gerar cÛdigo embutido e facilitar a rotina do desenvolvedor
+
+```
+(defn Example []
+   (defmacro Simple [arg]
+      (list 2 arg))
+   (println (macroexpand '(Simple 2))))
+```
+
+Chamada da Função: ``` (Example)```
+
+Retorno: ```(2 2)```
+
+- PHP
+
+O mais próximo que PHP consegue utilizar com macro é a utilização do define
+
+```
+define ( string $name , mixed $value [, bool $case_insensitive = FALSE ] ) : bool
+```
+
+
+- Protocol
+
+- Clojure
+
+O protocolo gerá automaticamente uma interface de acordo com a função.
+A interface terá métodos correspondentes às funções do protocolo e o protocolo funcionará automaticamente com instâncias da interface.
+
+```
+(defprotocol P
+  (foo [x])
+  (bar-me [x] [x y]))
+
+(deftype Foo [a b c]
+  P
+  (foo [x] a)
+  (bar-me [x] b)
+  (bar-me [x y] (+ c y)))
+
+(bar-me (Foo. 1 2 3) 42)
+= > 45
+```
+
+- PHP
+
+No PHP não será possivel implementar a função da interface
+
+
+```
+<?php
+
+// Declara a interface 'iTemplate'
+interface iTemplate
+{
+    public function setVariable($name, $var);
+    public function getHtml($template);
+}
+
+// Isso NÃO funcionará
+// Fatal error: Class BadTemplate contains 1 abstract methods
+// and must therefore be declared abstract (iTemplate::getHtml)
+class BadTemplate implements iTemplate
+{
+    private $vars = array();
+
+    public function setVariable($name, $var)
+    {
+        $this->vars[$name] = $var;
+    }
+}
+?>
+
+```
+
+
+## **Pontos Interessantes**
+
+- Facilidade na utilização de listas
+- Facilidade na utilização de Threads.
+- É possível incluir Clojure em um projeto JAVA
+- Possui implementações para rodar em Ruby , Python e Perl
+- É possível utilizar frameworks Java como Maven
+- Possui uma implementação chamada Clojure Script que compila para Javascript 
+
+
+## **Conclusão**
+
+Clojure é uma linguagem que traz facilidades na utilização da programação funcional e pode ser utilizado em vasta escala trazendo toda a facilidade 
+
+
+
+
+
+
+## **Bibliografia e Links**
+
+
+- Clojure : [clojure.org]()
+- Wikipedia Clojure: [https://pt.wikipedia.org/wiki/Clojure#Hist.C3.B3ria_e_processo_de_desenvolvimento]()
+- Clojure Docs : [https://clojuredocs.org]()
+- Artigo 'Devemos usar Clojure?' : [http://imasters.com.br/artigo/25335/linguagens/devemos-usar-clojure?trace=1519021197&source=single]()
+- GrokPodCast 141 Clojure : [http://www.grokpodcast.com/2015/07/16/episodio-141-clojure/]()
+- GrokPodCast 142 Clojure : [http://www.grokpodcast.com/2015/07/23/episodio-142-clojure/]()
+- GrokPodCast 143 Clojure : [http://www.grokpodcast.com/2015/07/30/episodio-143-clojure/]()
+- HipsterChat : [http://hipsters.tech/tecnologias-no-nubank-hipsters-01/]()
+- Implementação : [https://www.php.net/manual/pt_BR/language.oop5.interfaces.php]()
+
+
