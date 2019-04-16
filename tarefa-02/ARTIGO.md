@@ -85,6 +85,9 @@ Semelhante ao compareTo do Java
 
 
 São utilizados para gerar cÛdigo embutido e facilitar a rotina do desenvolvedor
+A macro pode retorna um código ao inves de somente um valor.
+
+
 
 ```
 (defn Example []
@@ -99,7 +102,8 @@ Retorno: ```(2 2)```
 
 - PHP
 
-O mais próximo que PHP consegue utilizar com macro é a utilização do define
+
+O mais próximo que PHP consegue utilizar com macro é a utilização do define igual ao C
 
 ```
 define ( string $name , mixed $value [, bool $case_insensitive = FALSE ] ) : bool
@@ -191,5 +195,6 @@ Clojure é uma linguagem que traz facilidades na utilização da programação f
 - GrokPodCast 143 Clojure : [http://www.grokpodcast.com/2015/07/30/episodio-143-clojure/]()
 - HipsterChat : [http://hipsters.tech/tecnologias-no-nubank-hipsters-01/]()
 - Implementação : [https://www.php.net/manual/pt_BR/language.oop5.interfaces.php]()
+http://blog.klipse.tech/clojure/2016/05/01/macro-tutorial-1.html
 
 
