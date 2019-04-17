@@ -84,8 +84,8 @@ Semelhante ao compareTo do Java
 - Clojure
 
 
-São utilizados para gerar cÛdigo embutido e facilitar a rotina do desenvolvedor
-A macro pode retorna um código ao inves de somente um valor.
+São utilizados para gerar cÛdigo embutido e facilitar a rotina do desenvolvedor.
+A macro pode retorna um código ao inves de somente um valor e  macro é definida no momento de compilação podendo gerar um erro especifico no momento em que a macro é avaliada.
 
 
 
@@ -99,6 +99,44 @@ A macro pode retorna um código ao inves de somente um valor.
 Chamada da Função: ``` (Example)```
 
 Retorno: ```(2 2)```
+
+- Um exemplo de macro é quando utilizamos unless (que é uma forma contrária a utilizar o if) e para isso como não está disponivel diretamente na linguagem a única forma de utilizar é através de macros
+
+```
+(defmacro unless
+[condition & forms]
+`(if (not ~condition)
+~@forms))
+```
+Chamada da Função
+```
+(unless (= 1 2)
+"um igual a dois"
+"um nao e igual a dois. Como?")
+```
+Retorno  ```"um igual a dois"```
+
+Conseguimos verificar como é utilizado a origem do Macro:
+```(macroexpand-1 '(unless (= 1 2) true false))```
+
+Retorno : ```;= (if (clojure.core/not (= 1 2)) true false)```
+
+-  Muitos elementos nativos do Clojure são somente Macros feitos através de Macro.
+Exemplo: OR
+Conseguimos avaliar através do comando : ``` (source or)```
+```
+(defmacro or
+  "Evaluates exprs one at a time, from left to right. If a form
+  returns a logical true value, or returns that value and doesn't
+  evaluate any of the other expressions, otherwise it returns the
+  value of the last expression. (or) returns nil."
+  {:added "1.0"}
+  ([] nil)
+  ([x] x)
+  ([x & next]
+      `(let [or# ~x]
+         (if or# or# (or ~@next)))))
+```
 
 - PHP
 
@@ -195,6 +233,7 @@ Clojure é uma linguagem que traz facilidades na utilização da programação f
 - GrokPodCast 143 Clojure : [http://www.grokpodcast.com/2015/07/30/episodio-143-clojure/]()
 - HipsterChat : [http://hipsters.tech/tecnologias-no-nubank-hipsters-01/]()
 - Implementação : [https://www.php.net/manual/pt_BR/language.oop5.interfaces.php]()
-http://blog.klipse.tech/clojure/2016/05/01/macro-tutorial-1.html
-
+- Exemplos de Macro : [http://blog.klipse.tech/clojure/2016/05/01/macro-tutorial-1.html]()
+- Mais Exemplos de Macro : [http://clojure-doc.org/articles/language/macros.html]()
+- Outros Exemplos de Macro :[https://aphyr.com/posts/305-clojure-from-the-ground-up-macros]()
 
