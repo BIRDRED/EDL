@@ -77,18 +77,20 @@ Semelhante ao compareTo do Java
 
 
 
-## **Comparação com PHP**
-
-- Macro
-
-- Clojure
+#**Comparação com PHP**
 
 
-São utilizados para gerar cÛdigo embutido e facilitar a rotina do desenvolvedor.
-A macro pode retorna um código ao inves de somente um valor e  macro é definida no momento de compilação podendo gerar um erro especifico no momento em que a macro é avaliada.
+### - Macro
 
+##### - Clojure
 
+ Um recurso muito poderoso da linguagem que vem com Clojure é macros, uma maneira de fazer a metaprogramação.
+Metaprogramação é utilizado para gerar código embutido e facilitar a rotina do desenvolvedor usando a própria linguagem.
+Isso é bem diferente de outras linguagens conhecidas por bons recursos de metaprogramação (por exemplo, Ruby) no Clojure, a metaprogramação não significa geração de strings. Em vez disso, significa construir uma árvore [de expressões ou listas].
+As macros são avaliadas em tempo de compilação e produzem estruturas de dados modificadas que são compiladas no bytecode da JVM. Esse bytecode é executado no tempo de execução.
+A macro pode retornar um código ao inves de somente um valor e  macro é definida no momento de compilação podendo gerar um erro especifico no momento em que a macro é avaliada.
 
+- Exemplo de Macro
 ```
 (defn Example []
    (defmacro Simple [arg]
@@ -99,6 +101,40 @@ A macro pode retorna um código ao inves de somente um valor e  macro é definid
 Chamada da Função: ``` (Example)```
 
 Retorno: ```(2 2)```
+
+
+#### -Qual é exatamente a diferença entre uma macro e uma função?
+
+------------
+
+
+Uma explicação comum da diferença entre funções e macros é:
+  - uma função transforma valores em outros valores.
+  - uma macro transforma o código em outro código.
+
+
+Verificando as funções:
+  Argumentos de função (a entrada) são avaliados antes da execução do código de função
+  Valor de retorno da função (a saída) não é avaliado
+
+Verificando as macros:
+  Argumentos de macros (a entrada) não são avaliados antes que o código de macro os utilize
+  Valor de retorno das macros (a saída) é avaliado
+
+
+Afirmação 1: a expansão da macro é equivalente a execução da função com argumentos citados
+```
+(= (macroexpand-1 '(foo-m arg1 arg2 ...))
+   (foo-f 'arg1' arg2 '...))
+```
+
+Afirmação # 2: a execução da macro é equivalente a avaliação da execução da função com argumentos citados
+
+```
+(= (foo-m arg1 arg2 ...)
+   (eval (foo-f 'arg1' arg2 '...)))
+```
+
 
 - Um exemplo de macro é quando utilizamos unless (que é uma forma contrária a utilizar o if) e para isso como não está disponivel diretamente na linguagem a única forma de utilizar é através de macros
 
@@ -138,7 +174,7 @@ Conseguimos avaliar através do comando : ``` (source or)```
          (if or# or# (or ~@next)))))
 ```
 
-- PHP
+##### - PHP
 
 
 O mais próximo que PHP consegue utilizar com macro é a utilização do define igual ao C
@@ -148,9 +184,9 @@ define ( string $name , mixed $value [, bool $case_insensitive = FALSE ] ) : boo
 ```
 
 
-- Protocol
+## - Protocol
 
-- Clojure
+##### - Clojure
 
 O protocolo gerá automaticamente uma interface de acordo com a função.
 A interface terá métodos correspondentes às funções do protocolo e o protocolo funcionará automaticamente com instâncias da interface.
@@ -170,7 +206,7 @@ A interface terá métodos correspondentes às funções do protocolo e o protoc
 = > 45
 ```
 
-- PHP
+#####- PHP
 
 No PHP não será possivel implementar a função da interface
 
