@@ -29,11 +29,12 @@ maximo (Folha v) = v
 maximo (Galho esq dir) = maximo dir
 
 --Função Inserção
---insere:: Int -> Arvore Int -> Arvore Int
---insere x (Galho (Folha a) arv1)
---   | x == a = (Galho x (insere x arv1))
---   | x < a  = (Galho a (insere x arv1))
---   | x > a  = (Galho a (insere x arv1))
---insere x (Folha a) = (Galho (Folha x) (Folha a))
+insere:: Int -> Arvore Int -> Arvore Int
+insere x (Folha a)
+   | x == a = (Galho (Folha x) (Folha a))
+   | x < a  = (Folha a)
+   | x > a  = (Galho (Folha x) (Folha a))
+insere x (Galho esq dir) = (Galho (insere x esq) (insere x dir))
+
 
 main =  print (insere 15 a1)

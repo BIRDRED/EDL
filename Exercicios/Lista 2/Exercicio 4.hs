@@ -36,4 +36,23 @@ insere x (Galho a esq dir)
    | x < a  = Galho a (insere x esq) dir
    | x > a  = Galho a esq (insere x dir)
 
-main =  print (insere 15 a3)
+mapA :: (a -> b) -> Arvore a -> Arvore b
+mapA _ Folha = Folha
+mapA f (Galho a esq dir) =
+  Galho (f a) (mapA f esq) (mapA f dir)
+
+foldA :: (a -> b -> b) -> b -> Arvore a -> b
+foldA _ b Folha = b
+foldA f b (Galho a esq dir) = foldA f (f a (foldA f b esq)) dir
+
+
+main :: IO ()
+main = do
+    print (foldA (+) (10) a3)
+    print (foldA (+) (0) a1)
+    print (foldA (*) (1) a3)
+
+{-main = do
+    print (mapA (==10) a3)
+    print (mapA (+10) a3)
+    print (mapA (*10) a3)-}
