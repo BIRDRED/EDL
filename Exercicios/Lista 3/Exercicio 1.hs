@@ -18,17 +18,28 @@ avalia (Num i) = i
 avalia (Add e1 e2) = (avalia e1) + (avalia e2)
 avalia (Sub e1 e2) = (avalia e1) - (avalia e2)
 
+{-avalia'::Exp -> Exp
+avalia' (Num i) = Num i
+avalia' (Add (Num e1) e2) = (avalia' e2)
+avalia'	(Add e1 (Num e2)) = (avalia' e1)
+avalia' (Add (Num e1) (Num e2)) = (avalia' (Num (e1+e2)))-}
+
 
 e0 = Add (Num 1) (Num 2)
-e1 = Add (Add (Add (Num 1) (Num 2)) (Num 3)) (Num 4)
+e1 = Add (Add (Add (Num 10) (Num 20)) (Num 3)) (Num 4)
 e2 = Add (Num 1) (Add (Num 2) (Add (Num 3) (Num 4)))
 e3 = Sub (Sub (Sub (Num 1) (Num 2)) (Num 3)) (Num 4)
 e4 = Sub (Num 1) (Sub (Num 2) (Sub (Num 3) (Num 4)))
 e5 = Sub (Sub (Num 1) (Num 2)) (Sub (Num 3) (Num 4))
 
-{-avalia'::Num a => Exp -> Num Int
-avalia' (Num i) = i
-avalia' (Add e1 e2) = (avalia' e1) + (avalia' e2)
-avalia' (Sub e1 e2) = (avalia' e1) - (avalia' e2)-}
 
-main = print (avalia' e0)
+
+main = print (avalia' e1)
+
+{-e1 = Add (
+		Add (
+			Num30
+			) (Num 3)
+		) (Num 4)
+
+-}
