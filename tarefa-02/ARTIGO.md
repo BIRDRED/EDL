@@ -86,7 +86,7 @@ Semelhante ao compareTo do Java
 
  Um recurso muito poderoso da linguagem que vem com Clojure é macros, uma maneira de fazer a metaprogramação.
 Metaprogramação é utilizado para gerar código embutido e facilitar a rotina do desenvolvedor usando a própria linguagem.
-Isso é bem diferente de outras linguagens conhecidas por bons recursos de metaprogramação (por exemplo, Ruby) no Clojure, a metaprogramação não significa geração de strings. Em vez disso, significa construir uma árvore [de expressões ou listas].
+Isso é bem diferente de outras linguagens conhecidas por bons recursos de metaprogramação (por exemplo, Ruby) no Clojure, a metaprogramação não significa geração de strings. Em vez disso, significa utilizar construtores de expressões ou listas.
 As macros são avaliadas em tempo de compilação e produzem estruturas de dados modificadas que são compiladas no bytecode da JVM. Esse bytecode é executado no tempo de execução.
 A macro pode retornar um código ao inves de somente um valor e  macro é definida no momento de compilação podendo gerar um erro especifico no momento em que a macro é avaliada.
 
@@ -112,28 +112,45 @@ Uma explicação comum da diferença entre funções e macros é:
   - uma função transforma valores em outros valores.
   - uma macro transforma o código em outro código.
 
-
-Verificando as funções:
-  Argumentos de função (a entrada) são avaliados antes da execução do código de função
-  Valor de retorno da função (a saída) não é avaliado
-
-Verificando as macros:
-  Argumentos de macros (a entrada) não são avaliados antes que o código de macro os utilize
-  Valor de retorno das macros (a saída) é avaliado
+Para ser mais especifico , duas perguntas precisam ser respondidas:
+  1) Quando os argumentos (a entrada) são verificados?
+  2) O valor de retorno é verificados?
 
 
-Afirmação 1: a expansão da macro é equivalente a execução da função com argumentos citados
+Nas funções:
+  1) Argumentos de função (a entrada) são avaliados antes da execução do código de função
+  2) Valor de retorno da função (a saída) não é avaliado
+
+Nas macros:
+  1) Argumentos de macros (a entrada) não são avaliados antes que o código de macro os utilize
+  2) Valor de retorno das macros (a saída) é avaliado
+
+
+Isso significa que os argumentos podem ser avaliados várias vezes ou não.
+Como exemplo é uma macro. Se o primeiro argumento for falso, o segundo argumento nunca será avaliado. 
+Se fosse uma função, isso não seria possível, porque os argumentos sempre seriam avaliados antes da execução da função.
+
+
+Para o exemplo:
 ```
-(= (macroexpand-1 '(foo-m arg1 arg2 ...))
-   (foo-f 'arg1' arg2 '...))
+(defmacro twice [e] `(do ~e ~e))
+(twice (println "Testando"))
 ```
+Saída: "Testando Testando"
+Ele verifica o argumento da String e como não tem dois argumentos , a macro copia o argumento e gera a lista (do (println "foo") (println "foo")).
+Portanto este novo código é executado.
 
-Afirmação # 2: a execução da macro é equivalente a avaliação da execução da função com argumentos citados
+
+Exemplo Função
 
 ```
-(= (foo-m arg1 arg2 ...)
-   (eval (foo-f 'arg1' arg2 '...)))
+(defn twice [e] `(do ~e ~e))
+(twice (println "foo"))
 ```
+Saída: "Testando" => #'user/twice (do nil nil)
+O argumento da String é avaliado imediatamente. 
+Como só tem um argumento a função retorna nil para uma das função então retorna nil para a função.
+Não é avaliado como código então a função é tratada como lista.
 
 
 - Um exemplo de macro é quando utilizamos unless (que é uma forma contrária a utilizar o if) e para isso como não está disponivel diretamente na linguagem a única forma de utilizar é através de macros
@@ -269,7 +286,8 @@ Clojure é uma linguagem que traz facilidades na utilização da programação f
 - GrokPodCast 143 Clojure : [http://www.grokpodcast.com/2015/07/30/episodio-143-clojure/]()
 - HipsterChat : [http://hipsters.tech/tecnologias-no-nubank-hipsters-01/]()
 - Implementação : [https://www.php.net/manual/pt_BR/language.oop5.interfaces.php]()
-- Exemplos de Macro : [http://blog.klipse.tech/clojure/2016/05/01/macro-tutorial-1.html]()
+- Exemplos de Macro (Macro x Função) : [http://blog.klipse.tech/clojure/2016/05/01/macro-tutorial-1.html]()
 - Mais Exemplos de Macro : [http://clojure-doc.org/articles/language/macros.html]()
 - Outros Exemplos de Macro :[https://aphyr.com/posts/305-clojure-from-the-ground-up-macros]()
+
 
