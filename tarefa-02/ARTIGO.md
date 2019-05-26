@@ -145,7 +145,7 @@ Exemplo Função
 
 ```
 (defn twice [e] `(do ~e ~e))
-(twice (println "foo"))
+(twice (println "Testando"))
 ```
 Saída: "Testando" => #'user/twice (do nil nil)
 O argumento da String é avaliado imediatamente. 
@@ -289,5 +289,6 @@ Clojure é uma linguagem que traz facilidades na utilização da programação f
 - Exemplos de Macro (Macro x Função) : [http://blog.klipse.tech/clojure/2016/05/01/macro-tutorial-1.html]()
 - Mais Exemplos de Macro : [http://clojure-doc.org/articles/language/macros.html]()
 - Outros Exemplos de Macro :[https://aphyr.com/posts/305-clojure-from-the-ground-up-macros]()
+- Exemplo das Funções :[https://stackoverflow.com/questions/3667403/what-is-the-difference-between-defn-and-defmacro]()
 
 
