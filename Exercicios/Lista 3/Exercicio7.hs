@@ -17,9 +17,8 @@ data Exp = Num Int
 --x = 1 + x - 20
 --c1 = Atr "x" (Sub (Add (Num 1) (Var "x")) (Num 20))
 --x = 1 ; y = 2 ; z = x+y
-c21 = (Atr "x" (Num 1)) 
-c22 = (Atr "y" (Num 2))
-c23 = (Atr "z" (Add (Var "x") (Var "y")))
+c2 = Seq (Atr "x" (Num 1)) (Seq (Atr "y" (Num 2)) (Atr "z" (Add (Var "x") (Var "y"))))
+
 
 avaliaExp :: Amb -> Exp -> Int
 avaliaExp amb (Num v)     = v
